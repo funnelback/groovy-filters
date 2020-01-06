@@ -1,0 +1,18 @@
+package com.funnelback.filter.filters;
+
+import com.funnelback.filter.api.DocumentType;
+import com.funnelback.filter.api.FilterContext;
+import com.funnelback.filter.api.FilterResult;
+import com.funnelback.filter.api.documents.FilterableDocument;
+import com.funnelback.filter.api.filters.Filter;
+import com.funnelback.filter.api.filters.FilterException;
+
+public class ForceHTMLMime implements Filter {
+
+    @Override
+    public FilterResult filter(FilterableDocument document, FilterContext context) throws RuntimeException,
+        FilterException {
+        return FilterResult.of(document.cloneWithDocumentType(DocumentType.MIME_HTML_TEXT));
+    }
+
+}
