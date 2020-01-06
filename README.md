@@ -4,7 +4,7 @@ This repository contains reusable filters that can be added to a Funnelback coll
 
 # Crawl filters
 
-Crawl filters can be added to the main filter chain (filter.classes) and operate on whole documents as they are filtered during the gather phase.
+Crawl filters can be added to the main filter chain (`filter.classes`) and operate on whole documents as they are filtered during the gather phase.
 
 See: [Developing custom filters](https://docs.funnelback.com/develop/programming-options/document-filtering/index.html)
 
