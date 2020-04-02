@@ -63,9 +63,9 @@ The JSON fields are:
 * **name**: This is a name to assign to the rule.
 * **description**: This is a description to assign to the rule (optional).
 * **patternType**: This defines the type of match that will be applied to the document's URL. Acceptable values are: 
-** `REGEX_PATTERN`: The URL must match (case insensitively) the `pattern`, expressed as a Java regular expression.
-** `LEFT_MATCH`: The URL must start with the `pattern`.
-** `SUBSTRING`: The URL must include the `pattern` somewhere in the URL.
+  * `REGEX_PATTERN`: The URL must match (case insensitively) the `pattern`, expressed as a Java regular expression.
+  * `LEFT_MATCH`: The URL must start with the `pattern`.
+  * `SUBSTRING`: The URL must include the `pattern` somewhere in the URL.
 * **pattern**: The URL is compared with this value using the method defined by **patternType**.
 * **metadata**: If the URL matches the pattern then the metadata listed as a set of key value pairs is attached to the document.
 
