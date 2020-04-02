@@ -1,0 +1,31 @@
+[
+  {
+    "name":"All docs",
+    "description":"Add this metadata to all documents",
+    "patternType":"REGEX_PATTERN",
+    "pattern":".*",
+    "metadata":{
+        "author":"John Smith",
+        "date":"2019"
+    }
+  },
+  {
+    "name":"Publications",
+    "description":"Add this metadata to urls beginning with http://example.com/publications",
+    "patternType":"LEFT_MATCH",
+    "pattern":"http://example.com/publications",
+    "metadata":{
+        "type":"publications",
+        "department":"Example department"
+    }
+  },
+  {
+    "name":"Media pages",
+    "description":"Add this metadata to urls containing /media/",
+    "patternType":"SUBSTRING",
+    "pattern":"/media/",
+    "metadata":{
+        "type":"media"
+    }
+  }
+]
