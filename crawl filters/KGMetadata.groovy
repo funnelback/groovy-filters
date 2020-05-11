@@ -35,10 +35,11 @@ public class KGMetadata implements StringDocumentFilter {
     // KG meta field names
     public static final String KGLABEL = "FUNkgNodeLabel";
     public static final String KGNAMES = "FUNkgNodeNames";
+    public url = "";
 
     public PreFilterCheck canFilter(NoContentDocument document, FilterContext context) {
 
-        def url = document.getURI().getPath();
+        url = document.getURI().getPath();
 
         // read possible regex to test URLs against.  if set only apply the other rules if it matches this regex
         def kgUrlFilter = context.getConfigValue("kg.urlfilter").orElse("")
@@ -92,6 +93,9 @@ public class KGMetadata implements StringDocumentFilter {
         def kgLabelFilterMeta = context.getConfigValue("kg.labels.filtermeta").orElse("")
         def kgNamesFilterMeta = context.getConfigValue("kg.names.filtermeta").orElse("")
 
+        // Read all collection.cfg keys (required for non-specific metadata field cloning keys)
+        def configKeys = context.getConfigKeys();
+
         //Ensure we get the existing metadata from the document, to preserve existing
         //metadata
         ListMultimap<String, String> metadata = document.getCopyOfMetadata();
@@ -130,6 +134,19 @@ public class KGMetadata implements StringDocumentFilter {
                         cloneJsoupSelectors(doc, item, KGNAMES, metadata)    
                     }
                 }
+
+                // Clone other fields for KG - other fields to clone have config names of 
+                // kg.property.<property-name>=<metadata-field-name>
+                // This will clone the <metadata-field-name> to a metadata class of kg.property.<property-name>
+                // You then need to map these fields using the metadata mapping interface.
+
+                configKeys.each { key ->
+                    if (key.startsWith("kg.property.")) {
+                        def value = context.getConfigValue(key).orElse("")
+                        cloneHtmlMetaFields(doc, value, key, metadata)                
+                    }
+                }
+
             } catch(e) {
                 log.error ("Failed extracting KG metadata for "+url+": "+e)
             }

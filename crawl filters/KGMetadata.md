@@ -32,6 +32,16 @@ kg.labels.jsoup=<delimited list of jsoup selectors>
 kg.names.jsoup=<delimited list of jsoup selectors>
 ```
 
+To clone a html `<meta>` tag for use with KG (note: unlike the other config keys the metadata field name only supports a single metadata field):
+
+This will clone the `<metadata field name>` to a metadata field `kg.property.<property name>`. You then need to map these fields using the metadata mapping interface.
+
+This is useful for cases where you need a specific field for use in the KG widget but it is already mapped to a metadata class with other fields (like the titles mapped to the t metadata class).
+
+```
+kg.property.<property name>=<metadata field name>
+```
+
 To extract the text from XML based on X-Path:
 
 ```
@@ -66,7 +76,7 @@ Extracted `kg.labels.*` values will appear in the `FUNkgNodeLabel` metadata fiel
 
 Extracted `kg.names.*` values will appear in the `FUNkgNodeNames` metadata field.
 
-Metadata mappings need to be created for `FUNkgNodeLabel` and `FUNkgNodeNames` as HTTP Header metadata.
+Metadata mappings need to be created for `FUNkgNodeLabel`, `FUNkgNodeNames` and any cloned metadata fields as HTTP Header metadata.
 
 Apply a node label (type) to all URLs.  This can be used to work around the URL limitation in external metadata when you wish to apply a value to all records and the URL is an unsupported format (e.g. because it's a fake URL for a non web collection type)
 
